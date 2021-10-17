@@ -34,15 +34,19 @@ services:
     - MONGO_INITDB_ROOT_PASSWORD=devdb1234
     volumes:
     - mongodbs:/data/db
+    - mongokbs:/data/db
     restart: always
     #networks:
     #- flikartbridge
 
 volumes:
   mongodbs:
+  mongokbs:
     #driver: local
 networks:
+   default:
+   external:
+   name: customoverlay
   #flipkartbridge :
     #driver: bridge
-   name:customoverlay
     
