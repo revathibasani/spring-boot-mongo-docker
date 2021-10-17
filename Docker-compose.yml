@@ -1,8 +1,8 @@
 version: '3.1'
-def buildnumber=BUILD_NUMBER
+#def buildnumber=BUILD_NUMBER
 services:
   springboot:
-    image: hadvithadocker/spring-boot-mongo:${buildnumber}
+    image: hadvithadocker/spring-boot-mongo:latest
     restart: always # This will be ignored if we deploy in docker swarm
     container_name: springbootapps
     environment:
