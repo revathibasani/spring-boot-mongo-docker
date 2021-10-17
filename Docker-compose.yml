@@ -23,7 +23,9 @@ services:
         condition: on-failure
         delay: 10s
         max_attempts: 5
-  
+        networks: 
+        - customoverlay
+        
   mongo:
     image: mongo
     container_name: spring-boot-mongo
@@ -34,7 +36,9 @@ services:
     - mongodbs:/data/db
     - mongokbs:/data/db
     restart: always
-  
+    networks:
+    - customoverlay
+    
 volumes:
   mongodbs:
   mongokbs:
