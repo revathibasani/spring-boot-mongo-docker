@@ -23,8 +23,8 @@ services:
         condition: on-failure
         delay: 10s
         max_attempts: 5
-    networks:
-    - flipkartbridge
+   #networks:
+    #- flipkartbridge
 
   mongo:
     image: mongo
@@ -35,13 +35,14 @@ services:
     volumes:
     - mongodbs:/data/db
     restart: always
-    networks:
-    - flikartbridge
+    #networks:
+    #- flikartbridge
 
 volumes:
   mongodbs:
-    driver: local
+    #driver: local
 networks:
-  flipkartbridge :
-    driver: bridge
+  #flipkartbridge :
+    #driver: bridge
+   name:customoverlay
     
