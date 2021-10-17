@@ -43,10 +43,12 @@ volumes:
   mongodbs:
   mongokbs:
     #driver: local
+    #external: true
 networks:
    default:
-   external: null
-   name:  customoverlay
+   external:
+   name: customoverlay
   #flipkartbridge :
     #driver: bridge
+    #external: true
     
