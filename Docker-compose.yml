@@ -45,7 +45,7 @@ volumes:
     #driver: local
 networks:
    default:
-   external: true
+   external: null
    name:  customoverlay
   #flipkartbridge :
     #driver: bridge
