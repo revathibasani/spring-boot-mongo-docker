@@ -23,8 +23,8 @@ services:
         condition: on-failure
         delay: 10s
         max_attempts: 5
-        #networks: 
-        #- customoverlay
+        networks: 
+        - customoverlay
         
   mongo:
     image: mongo
@@ -36,8 +36,8 @@ services:
     - mongodbs:/data/db
     - mongokbs:/data/db
     restart: always
-    #networks:
-    #- customoverlay
+    networks:
+    - customoverlay
     
 volumes:
   mongodbs:
