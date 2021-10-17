@@ -1,10 +1,9 @@
 version: '3.1'
-#def buildnumber=BUILD_NUMBER
 services:
   springboot:
-    image: hadvithadocker/spring-boot-mongo:latest
+    image: hadvithadocker/spring-boot-mongo-docker:latest
     restart: always # This will be ignored if we deploy in docker swarm
-    container_name: springbootapps
+    container_name: springboot
     environment:
     - MONGO_DB_HOSTNAME=mongo
     - MONGO_DB_USERNAME=devdb
@@ -23,32 +22,47 @@ services:
         condition: on-failure
         delay: 10s
         max_attempts: 5
-        networks: 
-        - customoverlay
+   
+    #depends_on:
+     # - springboot
+    #deploy:  # This will be considered only in docker swarm.
+      #replicas: 2
+      #update_config:
+        #parallelism: 1
+        #delay: 20s
+      #restart_policy:
+        #condition: on-failure
+        #delay: 10s
+        #max_attempts: 5 
         
+    #networks:
+    #- springbootbridge
+
   mongo:
     image: mongo
-    container_name: spring-boot-mongo
+    container_name: springboot-mongo
     environment:
     - MONGO_INITDB_ROOT_USERNAME=devdb
     - MONGO_INITDB_ROOT_PASSWORD=devdb1234
     volumes:
-    - mongodbs:/data/db
-    - mongokbs:/data/db
+    - mongodb:/data/db
+    - mongodb-bkp:/data/bkp
     restart: always
-    networks:
-    - customoverlay
-    
+    #networks:
+    #- springbootbridge
+
 volumes:
-  mongodbs:
-  mongokbs:
+  customoverlay:
     #driver: local
-    #external: true
+  mongodb:
+  mongodb-bkp:
+    #driver: local
+    #external: true 
+
 networks:
-   default:
-   external: true
-   name: customoverlay
-  #flipkartbridge :
-    #driver: bridge
-    #external: true
-    
+  customoverlay:
+    #driver: overlay
+    external: true
+  #springbootbridge :
+   #driver: bridge
+    #external: true 
